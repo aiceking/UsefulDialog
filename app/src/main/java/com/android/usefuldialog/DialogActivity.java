@@ -1,0 +1,104 @@
+package com.android.usefuldialog;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.android.dialoglibrary.UsefulDialogHelp;
+import com.android.dialoglibrary.usefuldialog.EditDialog;
+import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
+import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
+import com.bigkoo.pickerview.TimePickerView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+
+public class DialogActivity extends AppCompatActivity {
+
+    @BindView(R.id.btn_loading)
+    Button btnLoading;
+    @BindView(R.id.btn_title)
+    Button btnTitle;
+    @BindView(R.id.btn_title_message)
+    Button btnTitleMessage;
+    @BindView(R.id.btn_edittext)
+    Button btnEdittext;
+    @BindView(R.id.btn_date)
+    Button btnDate;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dialog);
+        ButterKnife.bind(this);
+    }
+
+    @OnClick({R.id.btn_loading, R.id.btn_title, R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.btn_loading:
+                UsefulDialogHelp.getInstance().showLoadingDialog(this, "加载中...", true);
+                break;
+            case R.id.btn_title:
+                UsefulDialogHelp.getInstance().showOneTitleDialog(this, "确认要提交吗?", "再想想", "提交", new OneTitleDialog.onBtnClickListener() {
+                    @Override
+                    public void onSure() {
+                        Toast.makeText(DialogActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onCancle() {
+                        Toast.makeText(DialogActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.btn_title_message:
+                UsefulDialogHelp.getInstance().showTitleAndMessageDialog(this, "提示", "确认要提交吗？", "再想想", "提交", new TitleAndMessageDialog.onBtnClickListener() {
+                    @Override
+                    public void onSure() {
+                        Toast.makeText(DialogActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override
+                    public void onCancle() {
+                        Toast.makeText(DialogActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.btn_edittext:
+                UsefulDialogHelp.getInstance().showEditDialog(this, "请填写内容", "取消", "确定", new EditDialog.onBtnClickListener() {
+                    @Override
+                    public void onSure(String message) {
+                        Toast.makeText(DialogActivity.this, "输入内容为："+message, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCancle() {
+                        Toast.makeText(DialogActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.btn_date:
+                Calendar startDate = Calendar.getInstance();
+                Calendar endDate = Calendar.getInstance();
+                endDate.set(2100, 12, 31);
+                UsefulDialogHelp.getInstance().showDateDialog(this, startDate, endDate, new TimePickerView.OnTimeSelectListener() {
+                    @Override
+                    public void onTimeSelect(Date date, View v) {
+                        Toast.makeText(DialogActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+        }
+    }
+    public  String getTime(Date date) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//时间显示样式，可选
+        return format.format(date);
+    }
+}
