@@ -1,5 +1,5 @@
 <resources>
-    <style name="dialog" parent="@android:style/Theme.Dialog">
+    <style name="useful_dialog" parent="@android:style/Theme.Dialog">
         <!--边框-->
         <item name="android:windowFrame">@null</item>
         <!--是否浮现在activity之上-->

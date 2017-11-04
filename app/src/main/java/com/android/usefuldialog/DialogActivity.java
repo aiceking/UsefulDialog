@@ -8,13 +8,16 @@ import android.widget.Toast;
 
 import com.android.dialoglibrary.UsefulDialogHelp;
 import com.android.dialoglibrary.usefuldialog.EditDialog;
+import com.android.dialoglibrary.usefuldialog.ListDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
 import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
 import com.bigkoo.pickerview.TimePickerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +36,11 @@ public class DialogActivity extends AppCompatActivity {
     Button btnEdittext;
     @BindView(R.id.btn_date)
     Button btnDate;
+    @BindView(R.id.btn_list_one)
+    Button btnListOne;
+    @BindView(R.id.btn_list_two)
+    Button btnListTwo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,7 @@ public class DialogActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_loading, R.id.btn_title, R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date})
+    @OnClick({R.id.btn_loading, R.id.btn_title, R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date, R.id.btn_list_one,R.id.btn_list_two})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_loading:
@@ -53,6 +61,7 @@ public class DialogActivity extends AppCompatActivity {
                     public void onSure() {
                         Toast.makeText(DialogActivity.this, "确定", Toast.LENGTH_SHORT).show();
                     }
+
                     @Override
                     public void onCancle() {
                         Toast.makeText(DialogActivity.this, "取消", Toast.LENGTH_SHORT).show();
@@ -65,6 +74,7 @@ public class DialogActivity extends AppCompatActivity {
                     public void onSure() {
                         Toast.makeText(DialogActivity.this, "确定", Toast.LENGTH_SHORT).show();
                     }
+
                     @Override
                     public void onCancle() {
                         Toast.makeText(DialogActivity.this, "取消", Toast.LENGTH_SHORT).show();
@@ -75,7 +85,7 @@ public class DialogActivity extends AppCompatActivity {
                 UsefulDialogHelp.getInstance().showEditDialog(this, "请填写内容", "取消", "确定", new EditDialog.onBtnClickListener() {
                     @Override
                     public void onSure(String message) {
-                        Toast.makeText(DialogActivity.this, "输入内容为："+message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DialogActivity.this, "输入内容为：" + message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -95,9 +105,40 @@ public class DialogActivity extends AppCompatActivity {
                     }
                 });
                 break;
+            case R.id.btn_list_one:
+                List<String> list1=new ArrayList<>();
+                list1.add("测试 1");
+                list1.add("测试 2");
+                list1.add("测试 3");
+                list1.add("测试 4");
+                UsefulDialogHelp.getInstance().showListDialog(this, list1, new ListDialog.onDialogListItemClickListener() {
+                    @Override
+                    public void onClick(int position, String itemContent) {
+                        Toast.makeText(DialogActivity.this, position+"="+itemContent, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.btn_list_two:
+                List<String> list2=new ArrayList<>();
+                list2.add("测试 111");
+                list2.add("测试 222");
+                list2.add("测试 333");
+                list2.add("测试 444");
+                list2.add("测试 555");
+                list2.add("测试 666");
+                list2.add("测试 777");
+                list2.add("测试 888");
+                UsefulDialogHelp.getInstance().showListDialog(this, list2, new ListDialog.onDialogListItemClickListener() {
+                    @Override
+                    public void onClick(int position, String itemContent) {
+                        Toast.makeText(DialogActivity.this, position+"="+itemContent, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
         }
     }
-    public  String getTime(Date date) {
+
+    public String getTime(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//时间显示样式，可选
         return format.format(date);
     }

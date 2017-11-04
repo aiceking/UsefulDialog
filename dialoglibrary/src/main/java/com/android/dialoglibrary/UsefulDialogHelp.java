@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 
 import com.android.dialoglibrary.usefuldialog.EditDialog;
+import com.android.dialoglibrary.usefuldialog.ListDialog;
 import com.android.dialoglibrary.usefuldialog.LoadingDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
 import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
 import com.bigkoo.pickerview.TimePickerView;
 
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by radio on 2017/9/19.
@@ -21,6 +23,7 @@ public class UsefulDialogHelp {
     private OneTitleDialog oneTitleDialog;
     private EditDialog editDialog;
     private TitleAndMessageDialog titleAndMessageDialog;
+    private ListDialog listDialog;
     public static UsefulDialogHelp getInstance(){
         if (dialogHelp==null){
             synchronized (UsefulDialogHelp.class){
@@ -31,11 +34,30 @@ public class UsefulDialogHelp {
         }
         return dialogHelp;
     }
+    /**ListView的dialog*/
+    public void showListDialog(Activity activity, List<String> list, ListDialog.onDialogListItemClickListener onDialogListItemClickListener){
+        try{
+         if (listDialog==null){
+             listDialog=new ListDialog(activity, R.style.useful_dialog).setOnDialogListItemClickListener(onDialogListItemClickListener);
+             listDialog.show();
+             listDialog.setList(list);
+         }else{
+             listDialog.setList(list);
+             if (!listDialog.isShowing()){
+                 listDialog.show();
+             }
+         }
+        }catch (Exception e){
+            listDialog=new ListDialog(activity, R.style.useful_dialog).setOnDialogListItemClickListener(onDialogListItemClickListener);
+            listDialog.show();
+            listDialog.setList(list);
+        }
+    }
     /**带输入框的dialog*/
-    public  void showEditDialog(Activity context, String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
+    public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
         try {
             if (editDialog==null){
-                editDialog=new EditDialog(context, R.style.dialog).initTitle(title)
+                editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
                         .initBtnText(cancleText,sureText)
                         .setOnBtnClickListener(listener);
                 editDialog.show();
@@ -48,17 +70,17 @@ public class UsefulDialogHelp {
                 }
             }
         }catch (Exception e){
-            editDialog=new EditDialog(context, R.style.dialog).initTitle(title)
+            editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
                     .initBtnText(cancleText,sureText)
                     .setOnBtnClickListener(listener);
             editDialog.show();
         }
     }
     /**带输入框的dialog,有预输入内容*/
-    public  void showEditDialog(Activity context, String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
+    public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
         try {
             if (editDialog==null){
-                editDialog=new EditDialog(context, R.style.dialog).initTitle(title)
+                editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
                         .initBtnText(cancleText,sureText)
                         .setOnBtnClickListener(listener);
                 editDialog.show();
@@ -72,7 +94,7 @@ public class UsefulDialogHelp {
                 }
             }
         }catch (Exception e){
-            editDialog=new EditDialog(context, R.style.dialog).initTitle(title)
+            editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
                     .initBtnText(cancleText,sureText)
                     .setOnBtnClickListener(listener);
             editDialog.show();
@@ -80,10 +102,10 @@ public class UsefulDialogHelp {
         }
     }
     /**带Title和message的dialog*/
-    public  void showTitleAndMessageDialog(Activity context, String title,String message, String cancleText, String sureText,TitleAndMessageDialog.onBtnClickListener listener){
+    public  void showTitleAndMessageDialog(Activity activity, String title,String message, String cancleText, String sureText,TitleAndMessageDialog.onBtnClickListener listener){
         try {
             if (titleAndMessageDialog==null){
-                titleAndMessageDialog=new TitleAndMessageDialog(context, R.style.dialog).initTitleAndMessage(title,message)
+                titleAndMessageDialog=new TitleAndMessageDialog(activity, R.style.useful_dialog).initTitleAndMessage(title,message)
                         .initBtnText(cancleText,sureText)
                         .setOnBtnClickListener(listener);
                 titleAndMessageDialog.show();
@@ -95,17 +117,17 @@ public class UsefulDialogHelp {
                 }
             }
         }catch (Exception e){
-            titleAndMessageDialog=new TitleAndMessageDialog(context, R.style.dialog).initTitleAndMessage(title,message)
+            titleAndMessageDialog=new TitleAndMessageDialog(activity, R.style.useful_dialog).initTitleAndMessage(title,message)
                     .initBtnText(cancleText,sureText)
                     .setOnBtnClickListener(listener);
             titleAndMessageDialog.show();
         }
     }
     /**只有Title的dialog*/
-    public  void showOneTitleDialog(Activity context, String title, String cancleText, String sureText,OneTitleDialog.onBtnClickListener listener){
+    public  void showOneTitleDialog(Activity activity, String title, String cancleText, String sureText,OneTitleDialog.onBtnClickListener listener){
         try {
         if (oneTitleDialog==null){
-            oneTitleDialog=new OneTitleDialog(context, R.style.dialog).initTitle(title,cancleText,sureText)
+            oneTitleDialog=new OneTitleDialog(activity, R.style.useful_dialog).initTitle(title,cancleText,sureText)
             .setOnBtnClickListener(listener);
             oneTitleDialog.show();
         }else{
@@ -115,16 +137,16 @@ public class UsefulDialogHelp {
              }
             }
         }catch (Exception e){
-            oneTitleDialog=new OneTitleDialog(context, R.style.dialog).initTitle(title,cancleText,sureText)
+            oneTitleDialog=new OneTitleDialog(activity, R.style.useful_dialog).initTitle(title,cancleText,sureText)
                     .setOnBtnClickListener(listener);
             oneTitleDialog.show();
         }
     }
     /**加载的dialog*/
-    public  void showLoadingDialog(Activity context, String title,boolean cancle){
+    public  void showLoadingDialog(Activity activity, String title,boolean cancle){
         try {
             if (loadingDialog==null){
-                loadingDialog=new LoadingDialog(context, R.style.dialog).initTitle(title);
+                loadingDialog=new LoadingDialog(activity, R.style.useful_dialog).initTitle(title);
                 loadingDialog.setCancelable(cancle);
                 loadingDialog.show();
             }else{
@@ -134,14 +156,14 @@ public class UsefulDialogHelp {
                 }
             }
         }catch (Exception e){
-            loadingDialog=new LoadingDialog(context, R.style.dialog).initTitle(title);
+            loadingDialog=new LoadingDialog(activity, R.style.useful_dialog).initTitle(title);
             loadingDialog.setCancelable(cancle);
             loadingDialog.show();
         }
     }
-    public  void showDateDialog(Context context, Calendar startDate, Calendar endDate, TimePickerView.OnTimeSelectListener onTimeSelectListener){
-        TimePickerView pvTime = new TimePickerView.Builder(context, onTimeSelectListener)
-                .setContentSize(30) .setType(new boolean[]{true, true, true, false, false, false}).setRangDate(startDate, endDate).build();
+    public  void showDateDialog(Context activity, Calendar startDate, Calendar endDate, TimePickerView.OnTimeSelectListener onTimeSelectListener){
+        TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
+                .setContentSize(23) .setType(new boolean[]{true, true, true, false, false, false}).setRangDate(startDate, endDate).build();
         pvTime.setDate(Calendar.getInstance());
         pvTime.show();
     }
