@@ -1,6 +1,8 @@
 package com.android.usefuldialog;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +42,15 @@ public class DialogActivity extends AppCompatActivity {
     Button btnListOne;
     @BindView(R.id.btn_list_two)
     Button btnListTwo;
-
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what==10){
+                UsefulDialogHelp.getInstance().closeLoadingDialog();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +63,20 @@ public class DialogActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_loading:
-                UsefulDialogHelp.getInstance().showLoadingDialog(this, "加载中...", true);
+                UsefulDialogHelp.getInstance().showLoadingDialog(this, "加载中 ...", true);
+
+                new Thread(){
+                    @Override
+                    public void run() {
+                        super.run();
+                        try {
+                            sleep(3000);
+                            handler.sendEmptyMessage(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
                 break;
             case R.id.btn_title:
                 UsefulDialogHelp.getInstance().showOneTitleDialog(this, "确认要提交吗?", "再想想", "提交", new OneTitleDialog.onBtnClickListener() {

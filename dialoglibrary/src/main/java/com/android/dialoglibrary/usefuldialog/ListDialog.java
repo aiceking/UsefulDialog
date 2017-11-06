@@ -67,6 +67,7 @@ private Context context;
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
               if (onDialogListItemClickListener!=null){
+                  dismiss();
                   onDialogListItemClickListener.onClick(i,list_strings.get(i));
               }
             }

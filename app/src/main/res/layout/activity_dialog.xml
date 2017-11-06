@@ -32,13 +32,7 @@
         android:textAllCaps="false"
 
         android:id="@+id/btn_edittext"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
 
-        android:text="时间选择器"
-        android:id="@+id/btn_date"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,4 +47,11 @@
 
         android:text="ListView的Dialog==="
         android:id="@+id/btn_list_two"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+
+        android:text="时间选择器"
+        android:id="@+id/btn_date"/>
 </LinearLayout>

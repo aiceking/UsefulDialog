@@ -13,10 +13,9 @@
         android:maxLines="1"
         android:textSize="14sp"
         android:paddingBottom="9dp"
-        android:text="哈哈"
         android:paddingTop="9dp"
-        android:layout_marginRight="18dp"
-        android:layout_marginLeft="18dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
         android:id="@+id/tv_popwindow_listview"
         />
 
