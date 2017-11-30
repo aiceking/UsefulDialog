@@ -42,11 +42,13 @@ public class DialogActivity extends AppCompatActivity {
     Button btnListOne;
     @BindView(R.id.btn_list_two)
     Button btnListTwo;
-    private Handler handler=new Handler(){
+    @BindView(R.id.btn_small_loading)
+    Button btnSmallLoading;
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what==10){
+            if (msg.what == 10) {
                 UsefulDialogHelp.getInstance().closeLoadingDialog();
             }
         }
@@ -59,13 +61,16 @@ public class DialogActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_loading, R.id.btn_title, R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date, R.id.btn_list_one,R.id.btn_list_two})
+    @OnClick({R.id.btn_loading, R.id.btn_title, R.id.btn_small_loading,R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date, R.id.btn_list_one, R.id.btn_list_two})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_small_loading:
+                UsefulDialogHelp.getInstance().showSmallLoadingDialog(this,true);
+                break;
             case R.id.btn_loading:
                 UsefulDialogHelp.getInstance().showLoadingDialog(this, "加载中 ...", true);
 
-                new Thread(){
+                new Thread() {
                     @Override
                     public void run() {
                         super.run();
@@ -129,7 +134,7 @@ public class DialogActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.btn_list_one:
-                List<String> list1=new ArrayList<>();
+                List<String> list1 = new ArrayList<>();
                 list1.add("测试 1");
                 list1.add("测试 2");
                 list1.add("测试 3");
@@ -137,12 +142,12 @@ public class DialogActivity extends AppCompatActivity {
                 UsefulDialogHelp.getInstance().showListDialog(this, list1, new ListDialog.onDialogListItemClickListener() {
                     @Override
                     public void onClick(int position, String itemContent) {
-                        Toast.makeText(DialogActivity.this, position+"="+itemContent, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DialogActivity.this, position + "=" + itemContent, Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;
             case R.id.btn_list_two:
-                List<String> list2=new ArrayList<>();
+                List<String> list2 = new ArrayList<>();
                 list2.add("测试 111");
                 list2.add("测试 222");
                 list2.add("测试 333");
@@ -154,7 +159,7 @@ public class DialogActivity extends AppCompatActivity {
                 UsefulDialogHelp.getInstance().showListDialog(this, list2, new ListDialog.onDialogListItemClickListener() {
                     @Override
                     public void onClick(int position, String itemContent) {
-                        Toast.makeText(DialogActivity.this, position+"="+itemContent, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DialogActivity.this, position + "=" + itemContent, Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;

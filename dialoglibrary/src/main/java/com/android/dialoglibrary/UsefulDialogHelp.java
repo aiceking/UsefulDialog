@@ -7,6 +7,7 @@ import com.android.dialoglibrary.usefuldialog.EditDialog;
 import com.android.dialoglibrary.usefuldialog.ListDialog;
 import com.android.dialoglibrary.usefuldialog.LoadingDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
+import com.android.dialoglibrary.usefuldialog.SmallLoadingDialog;
 import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
 import com.bigkoo.pickerview.TimePickerView;
 
@@ -24,6 +25,7 @@ public class UsefulDialogHelp {
     private EditDialog editDialog;
     private TitleAndMessageDialog titleAndMessageDialog;
     private ListDialog listDialog;
+    private SmallLoadingDialog smallLoadingDialog;
     public static UsefulDialogHelp getInstance(){
         if (dialogHelp==null){
             synchronized (UsefulDialogHelp.class){
@@ -161,6 +163,24 @@ public class UsefulDialogHelp {
             loadingDialog.show();
         }
     }
+    /**加载的dialog*/
+    public  void showSmallLoadingDialog(Activity activity,boolean cancle){
+        try {
+            if (smallLoadingDialog==null){
+                smallLoadingDialog=new SmallLoadingDialog(activity, R.style.useful_small_loadingdialog);
+                smallLoadingDialog.setCancelable(cancle);
+                smallLoadingDialog.show();
+            }else{
+                if (!smallLoadingDialog.isShowing()){
+                    smallLoadingDialog.show();
+                }
+            }
+        }catch (Exception e){
+            smallLoadingDialog=new SmallLoadingDialog(activity, R.style.useful_small_loadingdialog);
+            smallLoadingDialog.setCancelable(cancle);
+            smallLoadingDialog.show();
+        }
+    }
     public  void showDateDialog(Context activity, Calendar startDate, Calendar endDate, TimePickerView.OnTimeSelectListener onTimeSelectListener){
         TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
                 .setContentSize(23) .setType(new boolean[]{true, true, true, false, false, false}).setRangDate(startDate, endDate).build();
@@ -174,5 +194,11 @@ public class UsefulDialogHelp {
             }
         }
     }
-
+    public void closeSmallLoadingDialog(){
+        if (smallLoadingDialog!=null){
+            if (smallLoadingDialog.isShowing()){
+                smallLoadingDialog.dismiss();
+            }
+        }
+    }
 }

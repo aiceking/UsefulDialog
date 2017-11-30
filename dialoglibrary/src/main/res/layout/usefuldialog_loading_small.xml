@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/usefuldialog_small_loading_bg"
+    android:gravity="center">
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateloading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:loading_width="6dp"
+        android:layout_margin="1dp"
+        app:loading_color="@color/UsefulDialog_loading_view"
+        android:layout_centerInParent="true"/>
+</LinearLayout>
