@@ -39,6 +39,11 @@ public class UsefulDialogHelp {
     /**ListView的dialog*/
     public void showListDialog(Activity activity, List<String> list, ListDialog.onDialogListItemClickListener onDialogListItemClickListener){
         try{
+            if (listDialog!=null){
+                if (listDialog.isShowing()){
+                    return;
+                }
+            }
              listDialog=new ListDialog(activity, R.style.useful_dialog).setOnDialogListItemClickListener(onDialogListItemClickListener);
              listDialog.show();
              listDialog.setList(list);
@@ -48,6 +53,11 @@ public class UsefulDialogHelp {
     /**带输入框的dialog*/
     public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
         try {
+            if (editDialog!=null){
+                if (editDialog.isShowing()){
+                    return;
+                }
+            }
                 editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
                         .initBtnText(cancleText,sureText)
                         .setOnBtnClickListener(listener);
@@ -59,6 +69,11 @@ public class UsefulDialogHelp {
     /**带输入框的dialog,有预输入内容*/
     public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
         try {
+            if (editDialog!=null){
+                if (editDialog.isShowing()){
+                    return;
+                }
+            }
                 editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
                         .initBtnText(cancleText,sureText)
                         .setOnBtnClickListener(listener);
@@ -70,6 +85,11 @@ public class UsefulDialogHelp {
     /**带Title和message的dialog*/
     public  void showTitleAndMessageDialog(Activity activity, String title,String message, String cancleText, String sureText,TitleAndMessageDialog.onBtnClickListener listener){
         try {
+            if (titleAndMessageDialog!=null){
+                if (titleAndMessageDialog.isShowing()){
+                    return;
+                }
+            }
                 titleAndMessageDialog=new TitleAndMessageDialog(activity, R.style.useful_dialog).initTitleAndMessage(title,message)
                         .initBtnText(cancleText,sureText)
                         .setOnBtnClickListener(listener);
@@ -81,6 +101,11 @@ public class UsefulDialogHelp {
     /**只有Title的dialog*/
     public  void showOneTitleDialog(Activity activity, String title, String cancleText, String sureText,OneTitleDialog.onBtnClickListener listener){
         try {
+            if (oneTitleDialog!=null){
+                if (oneTitleDialog.isShowing()){
+                    return;
+                }
+            }
             oneTitleDialog=new OneTitleDialog(activity, R.style.useful_dialog).initTitle(title,cancleText,sureText)
             .setOnBtnClickListener(listener);
             oneTitleDialog.show();
@@ -92,6 +117,11 @@ public class UsefulDialogHelp {
     /**加载的dialog*/
     public  void showLoadingDialog(Activity activity, String title,boolean cancle){
         try {
+            if (loadingDialog!=null){
+                if (loadingDialog.isShowing()){
+                    return;
+                }
+            }
                 loadingDialog=new LoadingDialog(activity, R.style.useful_dialog).initTitle(title);
                 loadingDialog.setCancelable(cancle);
                 loadingDialog.show();
@@ -102,6 +132,11 @@ public class UsefulDialogHelp {
     /**加载的dialog*/
     public  void showSmallLoadingDialog(Activity activity,boolean cancle){
         try {
+            if (smallLoadingDialog!=null){
+                if (smallLoadingDialog.isShowing()){
+                    return;
+                }
+            }
                 smallLoadingDialog=new SmallLoadingDialog(activity, R.style.useful_small_loadingdialog);
                 smallLoadingDialog.setCancelable(cancle);
                 smallLoadingDialog.show();
