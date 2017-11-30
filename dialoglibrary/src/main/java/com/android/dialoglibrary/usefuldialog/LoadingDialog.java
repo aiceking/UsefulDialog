@@ -29,7 +29,6 @@ public class LoadingDialog extends Dialog {
         super(context, themeResId);
     }
 
-
     public LoadingDialog initTitle(String title) {
         this.title = title;
         return this;

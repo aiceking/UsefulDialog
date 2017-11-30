@@ -1,5 +1,6 @@
 package com.android.usefuldialog;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -44,6 +45,8 @@ public class DialogActivity extends AppCompatActivity {
     Button btnListTwo;
     @BindView(R.id.btn_small_loading)
     Button btnSmallLoading;
+    @BindView(R.id.btn_next)
+    Button btnNext;
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -61,11 +64,14 @@ public class DialogActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_loading, R.id.btn_title, R.id.btn_small_loading,R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date, R.id.btn_list_one, R.id.btn_list_two})
+    @OnClick({R.id.btn_loading, R.id.btn_title,R.id.btn_next, R.id.btn_small_loading, R.id.btn_title_message, R.id.btn_edittext, R.id.btn_date, R.id.btn_list_one, R.id.btn_list_two})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            case R.id.btn_next:
+                startActivity(new Intent(this,SecondActivity.class));
+                break;
             case R.id.btn_small_loading:
-                UsefulDialogHelp.getInstance().showSmallLoadingDialog(this,true);
+                UsefulDialogHelp.getInstance().showSmallLoadingDialog(this, true);
                 break;
             case R.id.btn_loading:
                 UsefulDialogHelp.getInstance().showLoadingDialog(this, "加载中 ...", true);
