@@ -188,17 +188,25 @@ public class UsefulDialogHelp {
         pvTime.show();
     }
     public void closeLoadingDialog(){
+        try {
         if (loadingDialog!=null){
             if (loadingDialog.isShowing()){
                 loadingDialog.dismiss();
             }
+        } }catch (Exception e){
+
         }
     }
     public void closeSmallLoadingDialog(){
-        if (smallLoadingDialog!=null){
-            if (smallLoadingDialog.isShowing()){
-                smallLoadingDialog.dismiss();
+        try {
+            if (smallLoadingDialog!=null){
+                if (smallLoadingDialog.isShowing()){
+                    smallLoadingDialog.dismiss();
+                }
             }
+        }catch (Exception e){
+
         }
+
     }
 }
