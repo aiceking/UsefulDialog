@@ -17,8 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DialogActivity"></activity>
-        <activity android:name=".SecondActivity"></activity>
+        <activity android:name=".DialogActivity" />
+        <activity android:name=".OtherActivity"></activity>
     </application>
 
 </manifest>

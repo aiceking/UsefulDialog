@@ -68,7 +68,7 @@ public class DialogActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_next:
-                startActivity(new Intent(this,SecondActivity.class));
+                startActivity(new Intent(this,OtherActivity.class));
                 break;
             case R.id.btn_small_loading:
                 UsefulDialogManager.getInstance().showSmallLoadingDialog(this, true);
