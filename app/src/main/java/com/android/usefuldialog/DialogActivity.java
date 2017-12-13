@@ -8,8 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.android.dialoglibrary.UsefulDialogHelp;
+import com.android.dialoglibrary.UsefulDialogManager;
 import com.android.dialoglibrary.usefuldialog.EditDialog;
 import com.android.dialoglibrary.usefuldialog.ListDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
@@ -50,11 +49,12 @@ public class DialogActivity extends AppCompatActivity {
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
+            if(!isFinishing()){
             super.handleMessage(msg);
             if (msg.what == 10) {
-                UsefulDialogHelp.getInstance().closeLoadingDialog();
+                UsefulDialogManager.getInstance().closeDialog(DialogActivity.this);
             }
-        }
+        }}
     };
 
     @Override
@@ -71,10 +71,10 @@ public class DialogActivity extends AppCompatActivity {
                 startActivity(new Intent(this,SecondActivity.class));
                 break;
             case R.id.btn_small_loading:
-                UsefulDialogHelp.getInstance().showSmallLoadingDialog(this, true);
+                UsefulDialogManager.getInstance().showSmallLoadingDialog(this, true);
                 break;
             case R.id.btn_loading:
-                UsefulDialogHelp.getInstance().showLoadingDialog(this, "加载中 ...", true);
+                UsefulDialogManager.getInstance().showLoadingDialog(this, "加载中 ...", true);
 
                 new Thread() {
                     @Override
@@ -90,7 +90,7 @@ public class DialogActivity extends AppCompatActivity {
                 }.start();
                 break;
             case R.id.btn_title:
-                UsefulDialogHelp.getInstance().showOneTitleDialog(this, "确认要提交吗?", "再想想", "提交", new OneTitleDialog.onBtnClickListener() {
+                UsefulDialogManager.getInstance().showOneTitleDialog(this, "确认要提交吗?", "再想想", "提交", new OneTitleDialog.onBtnClickListener() {
                     @Override
                     public void onSure() {
                         Toast.makeText(DialogActivity.this, "确定", Toast.LENGTH_SHORT).show();
@@ -103,7 +103,7 @@ public class DialogActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.btn_title_message:
-                UsefulDialogHelp.getInstance().showTitleAndMessageDialog(this, "提示", "确认要提交吗？", "再想想", "提交", new TitleAndMessageDialog.onBtnClickListener() {
+                UsefulDialogManager.getInstance().showTitleAndMessageDialog(this, "提示", "确认要提交吗？", "再想想", "提交", new TitleAndMessageDialog.onBtnClickListener() {
                     @Override
                     public void onSure() {
                         Toast.makeText(DialogActivity.this, "确定", Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class DialogActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.btn_edittext:
-                UsefulDialogHelp.getInstance().showEditDialog(this, "请填写内容", "取消", "确定", new EditDialog.onBtnClickListener() {
+                UsefulDialogManager.getInstance().showEditDialog(this, "请填写内容", "取消", "确定", new EditDialog.onBtnClickListener() {
                     @Override
                     public void onSure(String message) {
                         Toast.makeText(DialogActivity.this, "输入内容为：" + message, Toast.LENGTH_SHORT).show();
@@ -131,8 +131,10 @@ public class DialogActivity extends AppCompatActivity {
             case R.id.btn_date:
                 Calendar startDate = Calendar.getInstance();
                 Calendar endDate = Calendar.getInstance();
+                Calendar nowDate = Calendar.getInstance();
+                boolean []type=new boolean[]{true,true,true,false,false,false};
                 endDate.set(2100, 12, 31);
-                UsefulDialogHelp.getInstance().showDateDialog(this, startDate, endDate, new TimePickerView.OnTimeSelectListener() {
+                UsefulDialogManager.getInstance().showDateDialog(this, startDate, endDate,nowDate,type, new TimePickerView.OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         Toast.makeText(DialogActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
@@ -145,7 +147,7 @@ public class DialogActivity extends AppCompatActivity {
                 list1.add("测试 2");
                 list1.add("测试 3");
                 list1.add("测试 4");
-                UsefulDialogHelp.getInstance().showListDialog(this, list1, new ListDialog.onDialogListItemClickListener() {
+                UsefulDialogManager.getInstance().showListDialog(this, list1, new ListDialog.onDialogListItemClickListener() {
                     @Override
                     public void onClick(int position, String itemContent) {
                         Toast.makeText(DialogActivity.this, position + "=" + itemContent, Toast.LENGTH_SHORT).show();
@@ -162,7 +164,7 @@ public class DialogActivity extends AppCompatActivity {
                 list2.add("测试 666");
                 list2.add("测试 777");
                 list2.add("测试 888");
-                UsefulDialogHelp.getInstance().showListDialog(this, list2, new ListDialog.onDialogListItemClickListener() {
+                UsefulDialogManager.getInstance().showListDialog(this, list2, new ListDialog.onDialogListItemClickListener() {
                     @Override
                     public void onClick(int position, String itemContent) {
                         Toast.makeText(DialogActivity.this, position + "=" + itemContent, Toast.LENGTH_SHORT).show();
@@ -175,5 +177,11 @@ public class DialogActivity extends AppCompatActivity {
     public String getTime(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//时间显示样式，可选
         return format.format(date);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UsefulDialogManager.getInstance().closeDialog(this);
     }
 }

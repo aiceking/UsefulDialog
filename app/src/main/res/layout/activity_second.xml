@@ -9,8 +9,13 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Smallloadingdialog"
+        android:text="new"
         android:textAllCaps="false"
-
-        android:id="@+id/btn_small_loading"/>
+        android:id="@+id/btn_new"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="old"
+        android:textAllCaps="false"
+        android:id="@+id/btn_old"/>
 </LinearLayout>

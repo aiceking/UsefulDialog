@@ -13,7 +13,6 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.btn_test)
     Button btnTest;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
