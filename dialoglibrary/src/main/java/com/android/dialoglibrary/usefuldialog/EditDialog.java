@@ -26,6 +26,7 @@ public class EditDialog extends Dialog implements View.OnClickListener {
     private String title;
     private String cancle;
     private String sure;
+    private String editText;
     private onBtnClickListener onBtnClickListener;
 
     public EditDialog(@NonNull Context context) {
@@ -41,11 +42,15 @@ public class EditDialog extends Dialog implements View.OnClickListener {
         this.sure = sureText;
         return this;
     }
-    public void ClearEdit(){
-        edDiloagMessage.setText("");
-    }
+
     public void setEditText(String s){
-        edDiloagMessage.setText(s);
+        this.editText=s;
+        setText();
+
+    }
+    public EditDialog initEditText(String s){
+        this.editText=s;
+        return this;
     }
     public EditDialog initTitle(String title) {
         this.title = title;
@@ -92,6 +97,10 @@ public class EditDialog extends Dialog implements View.OnClickListener {
         }
         if (!TextUtils.isEmpty(sure)) {
             btnDialogSure.setText(sure);
+        }
+        if (!TextUtils.isEmpty(editText)) {
+            edDiloagMessage.setText(editText);
+            edDiloagMessage.setSelection(editText.length());
         }
     }
     @Override

@@ -2,6 +2,7 @@ package com.android.dialoglibrary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.dialoglibrary.usefuldialog.EditDialog;
@@ -55,8 +56,10 @@ public class UsefulDialogManager {
             listDialog.show();
             listDialog.setList(list);
             listDialogHashMap.put(activity,listDialog);
+            Log.v("dialog=","new");
         }else {
                 if (!listDialogHashMap.get(activity).isShowing()){
+                    Log.v("dialog=","old");
                     listDialogHashMap.get(activity).setList(list);
                     listDialogHashMap.get(activity).setOnDialogListItemClickListener(onDialogListItemClickListener);
                     listDialogHashMap.get(activity).show();
@@ -67,15 +70,19 @@ public class UsefulDialogManager {
     public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
         if (!editDialogHashMap.containsKey(activity)){
             EditDialog editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
-                    .initBtnText(cancleText,sureText)
+                    .initBtnText(cancleText,sureText).initEditText("")
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
+            Log.v("dialog=","new");
+
         }else{
             if (!editDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
                 editDialogHashMap.get(activity).setTitle(title);
                 editDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 editDialogHashMap.get(activity).setOnBtnClickListener(listener);
+                editDialogHashMap.get(activity).setEditText("");
                 editDialogHashMap.get(activity).show();
             }
         }
@@ -84,13 +91,15 @@ public class UsefulDialogManager {
     public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
         if (!editDialogHashMap.containsKey(activity)){
             EditDialog editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
-                    .initBtnText(cancleText,sureText)
+                    .initBtnText(cancleText,sureText).initEditText(editText)
                     .setOnBtnClickListener(listener);
-            editDialog.setEditText(editText);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
+            Log.v("dialog=","new");
+
         }else{
             if (!editDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
                 editDialogHashMap.get(activity).setTitle(title);
                 editDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 editDialogHashMap.get(activity).setOnBtnClickListener(listener);
@@ -107,8 +116,12 @@ public class UsefulDialogManager {
                     .setOnBtnClickListener(listener);
             titleAndMessageDialog.show();
             titleAndMessageDialogHashMap.put(activity,titleAndMessageDialog);
+            Log.v("dialog=","new");
+
         }else{
             if (!titleAndMessageDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
+
                 titleAndMessageDialogHashMap.get(activity).setTitleAndMessage(title,message);
                 titleAndMessageDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 titleAndMessageDialogHashMap.get(activity).setOnBtnClickListener(listener);
@@ -123,8 +136,12 @@ public class UsefulDialogManager {
                     .setOnBtnClickListener(listener);
             oneTitleDialog.show();
             oneTitleDialogHashMap.put(activity,oneTitleDialog);
+            Log.v("dialog=","new");
+
         }else{
             if (!oneTitleDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
+
                 oneTitleDialogHashMap.get(activity).setTitle(title,cancleText,sureText);
                 oneTitleDialogHashMap.get(activity).setOnBtnClickListener(listener);
                 oneTitleDialogHashMap.get(activity).show();
@@ -138,8 +155,12 @@ public class UsefulDialogManager {
             loadingDialog.setCancelable(cancle);
             loadingDialog.show();
             loadingDialogHashMap.put(activity,loadingDialog);
+            Log.v("dialog=","new");
+
         }else{
             if (!loadingDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
+
                 loadingDialogHashMap.get(activity).setTitle(title);
                 loadingDialogHashMap.get(activity).show();
             }
@@ -153,8 +174,12 @@ public class UsefulDialogManager {
             smallLoadingDialog.setCancelable(cancle);
             smallLoadingDialog.show();
             smallLoadingDialogHashMap.put(activity,smallLoadingDialog);
+            Log.v("dialog=","new");
+
         }else{
             if (!smallLoadingDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
+
                 smallLoadingDialogHashMap.get(activity).show();
             }
         }
@@ -178,6 +203,43 @@ public class UsefulDialogManager {
         }
     }
     public void closeDialog(Activity activity){
+        if (loadingDialogHashMap.containsKey(activity)){
+            if (loadingDialogHashMap.get(activity).isShowing()){
+                loadingDialogHashMap.get(activity).dismiss();
+            }
+        }
+        if (oneTitleDialogHashMap.containsKey(activity)){
+            if (oneTitleDialogHashMap.get(activity).isShowing()){
+                oneTitleDialogHashMap.get(activity).dismiss();
+            }
+        }
+        if (editDialogHashMap.containsKey(activity)){
+            if (editDialogHashMap.get(activity).isShowing()){
+                editDialogHashMap.get(activity).dismiss();
+            }
+        }
+        if (titleAndMessageDialogHashMap.containsKey(activity)){
+            if (titleAndMessageDialogHashMap.get(activity).isShowing()){
+                titleAndMessageDialogHashMap.get(activity).dismiss();
+            }
+        }
+        if (listDialogHashMap.containsKey(activity)){
+            if (listDialogHashMap.get(activity).isShowing()){
+                listDialogHashMap.get(activity).dismiss();
+            }
+        }
+        if (smallLoadingDialogHashMap.containsKey(activity)){
+            if (smallLoadingDialogHashMap.get(activity).isShowing()){
+                smallLoadingDialogHashMap.get(activity).dismiss();
+            }
+        }
+        if (timePickerViewHashMap.containsKey(activity)){
+            if (timePickerViewHashMap.get(activity).isShowing()){
+                timePickerViewHashMap.get(activity).dismiss();
+            }
+        }
+    }
+    public void onDestoryDialog(Activity activity){
         if (loadingDialogHashMap.containsKey(activity)){
             if (loadingDialogHashMap.get(activity).isShowing()){
                 loadingDialogHashMap.get(activity).dismiss();
@@ -221,5 +283,4 @@ public class UsefulDialogManager {
             timePickerViewHashMap.remove(activity);
         }
     }
-
 }

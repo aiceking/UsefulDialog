@@ -116,10 +116,10 @@ public class DialogActivity extends AppCompatActivity {
                 });
                 break;
             case R.id.btn_edittext:
-                UsefulDialogManager.getInstance().showEditDialog(this, "请填写内容", "取消", "确定", new EditDialog.onBtnClickListener() {
+                UsefulDialogManager.getInstance().showEditDialog(this, "请填写内容2", "取消2", "确定2","啦啦啦2", new EditDialog.onBtnClickListener() {
                     @Override
                     public void onSure(String message) {
-                        Toast.makeText(DialogActivity.this, "输入内容为：" + message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DialogActivity.this, "输入内容为2：" + message, Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -182,6 +182,6 @@ public class DialogActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        UsefulDialogManager.getInstance().closeDialog(this);
+        UsefulDialogManager.getInstance().onDestoryDialog(this);
     }
 }
