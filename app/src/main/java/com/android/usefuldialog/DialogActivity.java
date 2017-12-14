@@ -65,14 +65,6 @@ public class DialogActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        UsefulDialogManager.getInstance().onDestoryDialog(this);
-    }
-
     @OnClick({R.id.btn_small_loading_dialog, R.id.btn_loading_dialog, R.id.btn_gif_loading_dialog, R.id.btn_onetitle_dialog, R.id.btn_title_message_dialog, R.id.btn_edit_dialog, R.id.btn_edit_text_dialog,R.id.btn_list_dialog, R.id.btn_timepick_dialog})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -181,5 +173,10 @@ public class DialogActivity extends AppCompatActivity {
     public String getTime(Date date) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");//时间显示样式，可选
         return format.format(date);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        UsefulDialogManager.getInstance().onDestoryDialog(this);
     }
 }
