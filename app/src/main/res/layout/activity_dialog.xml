@@ -7,65 +7,56 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Smallloadingdialog"
+        android:text="SmallLoadingDialog"
         android:textAllCaps="false"
+        android:id="@+id/btn_small_loading_dialog"/>
 
-        android:id="@+id/btn_small_loading"/>
-    <Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="下一个Activity"
-    android:textAllCaps="false"
-
-    android:id="@+id/btn_next"/>
 <Button
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="loadingdialog"
+    android:text="LoadingDialog"
     android:textAllCaps="false"
-
-    android:id="@+id/btn_loading"/>
+    android:id="@+id/btn_loading_dialog"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="只有title"
+        android:text="GifloadingDialog"
         android:textAllCaps="false"
-
-        android:id="@+id/btn_title"/>
+        android:id="@+id/btn_gif_loading_dialog"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="title和message"
+        android:text="OneTitleDialog"
         android:textAllCaps="false"
-
-        android:id="@+id/btn_title_message"/>
+        android:id="@+id/btn_onetitle_dialog"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="输入框dialog"
+        android:text="TitleAndMessageDialog"
         android:textAllCaps="false"
-
-        android:id="@+id/btn_edittext"/>
-
+        android:id="@+id/btn_title_message_dialog"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="EditDialog"
         android:textAllCaps="false"
-
-        android:text="ListView的Dialog+++"
-        android:id="@+id/btn_list_one"/>
+        android:id="@+id/btn_edit_dialog"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="EditDialog 预输入"
         android:textAllCaps="false"
-
-        android:text="ListView的Dialog==="
-        android:id="@+id/btn_list_two"/>
+        android:id="@+id/btn_edit_text_dialog"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-
-        android:text="时间选择器"
-        android:id="@+id/btn_date"/>
+        android:text="ListDialog"
+        android:id="@+id/btn_list_dialog"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="TimePickDialog"
+        android:id="@+id/btn_timepick_dialog"/>
 </LinearLayout>

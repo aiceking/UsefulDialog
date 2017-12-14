@@ -101,6 +101,8 @@ public class EditDialog extends Dialog implements View.OnClickListener {
         if (!TextUtils.isEmpty(editText)) {
             edDiloagMessage.setText(editText);
             edDiloagMessage.setSelection(editText.length());
+        }else{
+            edDiloagMessage.setText("");
         }
     }
     @Override

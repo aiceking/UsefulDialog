@@ -2,10 +2,12 @@ package com.android.dialoglibrary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.android.dialoglibrary.usefuldialog.EditDialog;
+import com.android.dialoglibrary.usefuldialog.GifLoadingDialog;
 import com.android.dialoglibrary.usefuldialog.ListDialog;
 import com.android.dialoglibrary.usefuldialog.LoadingDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
@@ -30,6 +32,7 @@ public class UsefulDialogManager {
     private HashMap<Activity,ListDialog> listDialogHashMap;
     private HashMap<Activity,SmallLoadingDialog> smallLoadingDialogHashMap;
     private HashMap<Activity,TimePickerView> timePickerViewHashMap;
+    private HashMap<Activity,GifLoadingDialog> gifLoadingDialogHashMap;
     private UsefulDialogManager(){
         loadingDialogHashMap=new HashMap<>();
         oneTitleDialogHashMap=new HashMap<>();
@@ -38,6 +41,7 @@ public class UsefulDialogManager {
         listDialogHashMap=new HashMap<>();
         smallLoadingDialogHashMap=new HashMap<>();
         timePickerViewHashMap=new HashMap<>();
+        gifLoadingDialogHashMap=new HashMap<>();
     }
     public static UsefulDialogManager getInstance(){
         if (dialogHelp==null){
@@ -48,6 +52,25 @@ public class UsefulDialogManager {
             }
         }
         return dialogHelp;
+    }
+    /**gif的loadingDialog*/
+    public void showGifLoadingDialog(Activity activity, String title, @DrawableRes int gif,boolean cancle){
+        if (!gifLoadingDialogHashMap.containsKey(activity)){
+            GifLoadingDialog gifLoadingDialog=new GifLoadingDialog(activity, R.style.useful_dialog)
+                    .initGif(gif).initTitle(title);
+            gifLoadingDialog.setCancelable(cancle);
+            gifLoadingDialog.show();
+            gifLoadingDialogHashMap.put(activity,gifLoadingDialog);
+            Log.v("dialog=","new");
+        }else {
+            if (!gifLoadingDialogHashMap.get(activity).isShowing()){
+                Log.v("dialog=","old");
+                gifLoadingDialogHashMap.get(activity).setCancelable(cancle);
+                gifLoadingDialogHashMap.get(activity).setTitle(title);
+                gifLoadingDialogHashMap.get(activity).setGif(gif);
+                gifLoadingDialogHashMap.get(activity).show();
+            }
+        }
     }
     /**ListView的dialog*/
     public void showListDialog(Activity activity, List<String> list, ListDialog.onDialogListItemClickListener onDialogListItemClickListener){
@@ -137,11 +160,9 @@ public class UsefulDialogManager {
             oneTitleDialog.show();
             oneTitleDialogHashMap.put(activity,oneTitleDialog);
             Log.v("dialog=","new");
-
         }else{
             if (!oneTitleDialogHashMap.get(activity).isShowing()){
                 Log.v("dialog=","old");
-
                 oneTitleDialogHashMap.get(activity).setTitle(title,cancleText,sureText);
                 oneTitleDialogHashMap.get(activity).setOnBtnClickListener(listener);
                 oneTitleDialogHashMap.get(activity).show();
@@ -160,7 +181,7 @@ public class UsefulDialogManager {
         }else{
             if (!loadingDialogHashMap.get(activity).isShowing()){
                 Log.v("dialog=","old");
-
+                loadingDialogHashMap.get(activity).setCancelable(cancle);
                 loadingDialogHashMap.get(activity).setTitle(title);
                 loadingDialogHashMap.get(activity).show();
             }
@@ -179,7 +200,7 @@ public class UsefulDialogManager {
         }else{
             if (!smallLoadingDialogHashMap.get(activity).isShowing()){
                 Log.v("dialog=","old");
-
+                smallLoadingDialogHashMap.get(activity).setCancelable(cancle);
                 smallLoadingDialogHashMap.get(activity).show();
             }
         }
@@ -238,6 +259,11 @@ public class UsefulDialogManager {
                 timePickerViewHashMap.get(activity).dismiss();
             }
         }
+        if (gifLoadingDialogHashMap.containsKey(activity)){
+            if (gifLoadingDialogHashMap.get(activity).isShowing()){
+                gifLoadingDialogHashMap.get(activity).dismiss();
+            }
+        }
     }
     public void onDestoryDialog(Activity activity){
         if (loadingDialogHashMap.containsKey(activity)){
@@ -281,6 +307,12 @@ public class UsefulDialogManager {
                 timePickerViewHashMap.get(activity).dismiss();
             }
             timePickerViewHashMap.remove(activity);
+        }
+        if (gifLoadingDialogHashMap.containsKey(activity)){
+            if (gifLoadingDialogHashMap.get(activity).isShowing()){
+                gifLoadingDialogHashMap.get(activity).dismiss();
+            }
+            gifLoadingDialogHashMap.remove(activity);
         }
     }
 }
