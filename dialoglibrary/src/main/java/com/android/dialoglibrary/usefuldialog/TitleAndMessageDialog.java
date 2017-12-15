@@ -1,5 +1,6 @@
 package com.android.dialoglibrary.usefuldialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.dialoglibrary.R;
+import com.android.dialoglibrary.UsefulDialogManager;
 
 
 /**
@@ -26,6 +28,8 @@ public class TitleAndMessageDialog extends Dialog implements View.OnClickListene
     private String message;
     private String cancle;
     private String sure;
+    private Activity activity;
+
     private onBtnClickListener onBtnClickListener;
 
     public TitleAndMessageDialog(@NonNull Context context) {
@@ -34,6 +38,7 @@ public class TitleAndMessageDialog extends Dialog implements View.OnClickListene
 
     public TitleAndMessageDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
+        activity=(Activity) context;
     }
 
     public TitleAndMessageDialog initBtnText(String cancleText, String sureText) {
@@ -76,6 +81,12 @@ public class TitleAndMessageDialog extends Dialog implements View.OnClickListene
         btnDialogCancle.setOnClickListener(this);
         btnDialogSure=(Button)findViewById(R.id.btn_dialog_sure);
         btnDialogSure.setOnClickListener(this);
+        if (UsefulDialogManager.getInstance().getBtnCancleColor()!=0){
+            btnDialogCancle.setTextColor(activity.getResources().getColor(UsefulDialogManager.getInstance().getBtnCancleColor()));
+        }
+        if (UsefulDialogManager.getInstance().getBtnSureColor()!=0){
+            btnDialogSure.setTextColor(activity.getResources().getColor(UsefulDialogManager.getInstance().getBtnSureColor()));
+        }
     }
 
     private void setText() {

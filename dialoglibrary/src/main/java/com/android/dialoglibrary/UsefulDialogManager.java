@@ -2,6 +2,7 @@ package com.android.dialoglibrary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.Log;
 import android.widget.Toast;
@@ -33,6 +34,19 @@ public class UsefulDialogManager {
     private HashMap<Activity,SmallLoadingDialog> smallLoadingDialogHashMap;
     private HashMap<Activity,TimePickerView> timePickerViewHashMap;
     private HashMap<Activity,GifLoadingDialog> gifLoadingDialogHashMap;
+    private @ColorRes int btnCancleColor;
+    private @ColorRes int btnSureColor;
+    public int getBtnCancleColor() {
+        return btnCancleColor;
+    }
+    public void setBtnColor(int btnCancleColor,int btnSureColor) {
+        this.btnCancleColor = btnCancleColor;
+        this.btnSureColor = btnSureColor;
+
+    }
+    public int getBtnSureColor() {
+        return btnSureColor;
+    }
     private UsefulDialogManager(){
         loadingDialogHashMap=new HashMap<>();
         oneTitleDialogHashMap=new HashMap<>();
@@ -100,6 +114,7 @@ public class UsefulDialogManager {
             Log.v("dialog=","new");
 
         }else{
+
             if (!editDialogHashMap.get(activity).isShowing()){
                 Log.v("dialog=","old");
                 editDialogHashMap.get(activity).setTitle(title);

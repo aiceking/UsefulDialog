@@ -2,6 +2,8 @@ package com.android.usefuldialog.application;
 
 import android.app.Application;
 
+import com.android.dialoglibrary.UsefulDialogManager;
+import com.android.usefuldialog.R;
 import com.squareup.leakcanary.LeakCanary;
 
 /**
@@ -13,5 +15,6 @@ public class MyApplication extends Application{
     public void onCreate() {
         super.onCreate();
         LeakCanary.install(this);
+        UsefulDialogManager.getInstance().setBtnColor(R.color.colorPrimary,R.color.colorAccent);
     }
 }

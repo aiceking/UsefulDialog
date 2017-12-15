@@ -1,5 +1,6 @@
 package com.android.dialoglibrary.usefuldialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.dialoglibrary.R;
+import com.android.dialoglibrary.UsefulDialogManager;
 
 /**
  * Created by radio on 2017/9/28.
@@ -28,13 +30,14 @@ public class EditDialog extends Dialog implements View.OnClickListener {
     private String sure;
     private String editText;
     private onBtnClickListener onBtnClickListener;
-
+    private Activity activity;
     public EditDialog(@NonNull Context context) {
         super(context);
     }
 
     public EditDialog(@NonNull Context context, @StyleRes int themeResId) {
         super(context, themeResId);
+        activity=(Activity) context;
     }
 
     public EditDialog initBtnText(String cancleText, String sureText) {
@@ -86,6 +89,12 @@ public class EditDialog extends Dialog implements View.OnClickListener {
         btnDialogSure=(Button)findViewById(R.id.btn_dialog_sure);
         btnDialogSure.setOnClickListener(this);
         edDiloagMessage=(EditText)findViewById(R.id.ed_diloag_message);
+        if (UsefulDialogManager.getInstance().getBtnCancleColor()!=0){
+            btnDialogCancle.setTextColor(activity.getResources().getColor(UsefulDialogManager.getInstance().getBtnCancleColor()));
+        }
+        if (UsefulDialogManager.getInstance().getBtnSureColor()!=0){
+            btnDialogSure.setTextColor(activity.getResources().getColor(UsefulDialogManager.getInstance().getBtnSureColor()));
+        }
     }
 
     private void setText() {
