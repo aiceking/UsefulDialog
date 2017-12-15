@@ -75,10 +75,8 @@ public class UsefulDialogManager {
             gifLoadingDialog.setCancelable(cancle);
             gifLoadingDialog.show();
             gifLoadingDialogHashMap.put(activity,gifLoadingDialog);
-            Log.v("dialog=","new");
         }else {
             if (!gifLoadingDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
                 gifLoadingDialogHashMap.get(activity).setCancelable(cancle);
                 gifLoadingDialogHashMap.get(activity).setTitle(title);
                 gifLoadingDialogHashMap.get(activity).setGif(gif);
@@ -93,10 +91,8 @@ public class UsefulDialogManager {
             listDialog.show();
             listDialog.setList(list);
             listDialogHashMap.put(activity,listDialog);
-            Log.v("dialog=","new");
         }else {
                 if (!listDialogHashMap.get(activity).isShowing()){
-                    Log.v("dialog=","old");
                     listDialogHashMap.get(activity).setList(list);
                     listDialogHashMap.get(activity).setOnDialogListItemClickListener(onDialogListItemClickListener);
                     listDialogHashMap.get(activity).show();
@@ -111,12 +107,9 @@ public class UsefulDialogManager {
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
-            Log.v("dialog=","new");
-
         }else{
 
             if (!editDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
                 editDialogHashMap.get(activity).setTitle(title);
                 editDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 editDialogHashMap.get(activity).setOnBtnClickListener(listener);
@@ -133,11 +126,8 @@ public class UsefulDialogManager {
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
-            Log.v("dialog=","new");
-
         }else{
             if (!editDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
                 editDialogHashMap.get(activity).setTitle(title);
                 editDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 editDialogHashMap.get(activity).setOnBtnClickListener(listener);
@@ -154,12 +144,8 @@ public class UsefulDialogManager {
                     .setOnBtnClickListener(listener);
             titleAndMessageDialog.show();
             titleAndMessageDialogHashMap.put(activity,titleAndMessageDialog);
-            Log.v("dialog=","new");
-
         }else{
             if (!titleAndMessageDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
-
                 titleAndMessageDialogHashMap.get(activity).setTitleAndMessage(title,message);
                 titleAndMessageDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 titleAndMessageDialogHashMap.get(activity).setOnBtnClickListener(listener);
@@ -174,10 +160,8 @@ public class UsefulDialogManager {
                     .setOnBtnClickListener(listener);
             oneTitleDialog.show();
             oneTitleDialogHashMap.put(activity,oneTitleDialog);
-            Log.v("dialog=","new");
         }else{
             if (!oneTitleDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
                 oneTitleDialogHashMap.get(activity).setTitle(title,cancleText,sureText);
                 oneTitleDialogHashMap.get(activity).setOnBtnClickListener(listener);
                 oneTitleDialogHashMap.get(activity).show();
@@ -191,11 +175,9 @@ public class UsefulDialogManager {
             loadingDialog.setCancelable(cancle);
             loadingDialog.show();
             loadingDialogHashMap.put(activity,loadingDialog);
-            Log.v("dialog=","new");
 
         }else{
             if (!loadingDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
                 loadingDialogHashMap.get(activity).setCancelable(cancle);
                 loadingDialogHashMap.get(activity).setTitle(title);
                 loadingDialogHashMap.get(activity).show();
@@ -210,11 +192,9 @@ public class UsefulDialogManager {
             smallLoadingDialog.setCancelable(cancle);
             smallLoadingDialog.show();
             smallLoadingDialogHashMap.put(activity,smallLoadingDialog);
-            Log.v("dialog=","new");
 
         }else{
             if (!smallLoadingDialogHashMap.get(activity).isShowing()){
-                Log.v("dialog=","old");
                 smallLoadingDialogHashMap.get(activity).setCancelable(cancle);
                 smallLoadingDialogHashMap.get(activity).show();
             }
