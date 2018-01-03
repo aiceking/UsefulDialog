@@ -148,6 +148,7 @@ public class DialogActivity extends AppCompatActivity {
                 list1.add("测试 2");
                 list1.add("测试 3");
                 list1.add("测试 4");
+
                 UsefulDialogManager.getInstance().showListDialog(this, list1, new ListDialog.onDialogListItemClickListener() {
                     @Override
                     public void onClick(int position, String itemContent) {
