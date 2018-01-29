@@ -6,12 +6,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
+import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.dialoglibrary.EditType;
 import com.android.dialoglibrary.R;
 import com.android.dialoglibrary.UsefulDialogManager;
 
@@ -89,6 +91,11 @@ public class EditDialog extends Dialog implements View.OnClickListener {
         btnDialogSure=(Button)findViewById(R.id.btn_dialog_sure);
         btnDialogSure.setOnClickListener(this);
         edDiloagMessage=(EditText)findViewById(R.id.ed_diloag_message);
+        if (UsefulDialogManager.getInstance().getEditType()!=null) {
+            if (UsefulDialogManager.getInstance().getEditType() == EditType.number) {
+                edDiloagMessage.setInputType(InputType.TYPE_CLASS_NUMBER);
+            }
+        }
         if (UsefulDialogManager.getInstance().getBtnCancleColor()!=0){
             btnDialogCancle.setTextColor(activity.getResources().getColor(UsefulDialogManager.getInstance().getBtnCancleColor()));
         }

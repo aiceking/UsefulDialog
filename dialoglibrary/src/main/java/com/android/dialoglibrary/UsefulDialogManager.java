@@ -36,6 +36,18 @@ public class UsefulDialogManager {
     private HashMap<Activity,GifLoadingDialog> gifLoadingDialogHashMap;
     private @ColorRes int btnCancleColor;
     private @ColorRes int btnSureColor;
+    public EditType getEditType() {
+        return editType;
+    }
+
+    public void setEditType(EditType editType) {
+        this.editType = editType;
+    }
+
+    private  EditType editType;
+
+
+
     public int getBtnCancleColor() {
         return btnCancleColor;
     }
