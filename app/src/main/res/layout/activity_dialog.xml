@@ -59,4 +59,10 @@
         android:textAllCaps="false"
         android:text="TimePickDialog"
         android:id="@+id/btn_timepick_dialog"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="OptionsPickerDialog"
+        android:id="@+id/btn_optionspick_dialog"/>
 </LinearLayout>

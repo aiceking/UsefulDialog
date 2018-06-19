@@ -13,6 +13,7 @@ import com.android.dialoglibrary.usefuldialog.EditDialog;
 import com.android.dialoglibrary.usefuldialog.ListDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
 import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
 import java.text.SimpleDateFormat;
@@ -65,7 +66,7 @@ public class DialogActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    @OnClick({R.id.btn_small_loading_dialog, R.id.btn_loading_dialog, R.id.btn_gif_loading_dialog, R.id.btn_onetitle_dialog, R.id.btn_title_message_dialog, R.id.btn_edit_dialog, R.id.btn_edit_text_dialog,R.id.btn_list_dialog, R.id.btn_timepick_dialog})
+    @OnClick({R.id.btn_small_loading_dialog,R.id.btn_optionspick_dialog, R.id.btn_loading_dialog, R.id.btn_gif_loading_dialog, R.id.btn_onetitle_dialog, R.id.btn_title_message_dialog, R.id.btn_edit_dialog, R.id.btn_edit_text_dialog,R.id.btn_list_dialog, R.id.btn_timepick_dialog})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_small_loading_dialog:
@@ -166,6 +167,19 @@ public class DialogActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSelect(Date date, View v) {
                         Toast.makeText(DialogActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                break;
+            case R.id.btn_optionspick_dialog:
+                final List<String> list_select = new ArrayList<>();
+                list_select.add("测试 1");
+                list_select.add("测试 2");
+                list_select.add("测试 3");
+                list_select.add("测试 4");
+                UsefulDialogManager.getInstance().showSelectDialog(this, list_select, "请选择", new OptionsPickerView.OnOptionsSelectListener() {
+                    @Override
+                    public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                        Toast.makeText(DialogActivity.this, list_select.get(options1), Toast.LENGTH_SHORT).show();
                     }
                 });
                 break;

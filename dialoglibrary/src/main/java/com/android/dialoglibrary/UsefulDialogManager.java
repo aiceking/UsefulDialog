@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.dialoglibrary.usefuldialog.EditDialog;
@@ -14,6 +15,7 @@ import com.android.dialoglibrary.usefuldialog.LoadingDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
 import com.android.dialoglibrary.usefuldialog.SmallLoadingDialog;
 import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
 import java.util.Calendar;
@@ -33,6 +35,7 @@ public class UsefulDialogManager {
     private HashMap<Activity,ListDialog> listDialogHashMap;
     private HashMap<Activity,SmallLoadingDialog> smallLoadingDialogHashMap;
     private HashMap<Activity,TimePickerView> timePickerViewHashMap;
+    private HashMap<Activity,OptionsPickerView> optionsPickerViewHashMap;
     private HashMap<Activity,GifLoadingDialog> gifLoadingDialogHashMap;
     private @ColorRes int btnCancleColor;
     private @ColorRes int btnSureColor;
@@ -67,6 +70,7 @@ public class UsefulDialogManager {
         listDialogHashMap=new HashMap<>();
         smallLoadingDialogHashMap=new HashMap<>();
         timePickerViewHashMap=new HashMap<>();
+        optionsPickerViewHashMap=new HashMap<>();
         gifLoadingDialogHashMap=new HashMap<>();
     }
     public static UsefulDialogManager getInstance(){
@@ -230,6 +234,21 @@ public class UsefulDialogManager {
             }
         }
     }
+    public  void showSelectDialog(Activity activity, List<String> list, String title,OptionsPickerView.OnOptionsSelectListener onOptionsSelectListener){
+        if (!optionsPickerViewHashMap.containsKey(activity)){
+            OptionsPickerView pvOptions = new  OptionsPickerView.Builder(activity,onOptionsSelectListener).setContentTextSize(20).setTitleText(title).build();
+            pvOptions.setPicker(list);
+            pvOptions.show();
+        }else{
+            if (!optionsPickerViewHashMap.get(activity).isShowing()){
+                optionsPickerViewHashMap.remove(activity);
+                OptionsPickerView pvOptions = new  OptionsPickerView.Builder(activity,onOptionsSelectListener).setContentTextSize(20).setTitleText(title).build();
+                pvOptions.setPicker(list);
+                pvOptions.show();
+                optionsPickerViewHashMap.put(activity,pvOptions);
+            }
+        }
+    }
     public void closeDialog(Activity activity){
         if (loadingDialogHashMap.containsKey(activity)){
             if (loadingDialogHashMap.get(activity).isShowing()){
@@ -264,6 +283,11 @@ public class UsefulDialogManager {
         if (timePickerViewHashMap.containsKey(activity)){
             if (timePickerViewHashMap.get(activity).isShowing()){
                 timePickerViewHashMap.get(activity).dismiss();
+            }
+        }
+        if (optionsPickerViewHashMap.containsKey(activity)){
+            if (optionsPickerViewHashMap.get(activity).isShowing()){
+                optionsPickerViewHashMap.get(activity).dismiss();
             }
         }
         if (gifLoadingDialogHashMap.containsKey(activity)){
@@ -314,6 +338,12 @@ public class UsefulDialogManager {
                 timePickerViewHashMap.get(activity).dismiss();
             }
             timePickerViewHashMap.remove(activity);
+        }
+        if (optionsPickerViewHashMap.containsKey(activity)){
+            if (optionsPickerViewHashMap.get(activity).isShowing()){
+                optionsPickerViewHashMap.get(activity).dismiss();
+            }
+            optionsPickerViewHashMap.remove(activity);
         }
         if (gifLoadingDialogHashMap.containsKey(activity)){
             if (gifLoadingDialogHashMap.get(activity).isShowing()){
