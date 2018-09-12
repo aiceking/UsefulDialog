@@ -76,7 +76,7 @@ public class DialogActivity extends AppCompatActivity {
                 UsefulDialogManager.getInstance().showLoadingDialog(this, "加载中 ...", true);
                 break;
             case R.id.btn_gif_loading_dialog:
-                UsefulDialogManager.getInstance().showGifLoadingDialog(this, "加载中 ...", R.drawable.zhufaner, true);
+                UsefulDialogManager.getInstance().showGifLoadingDialog(this, "加载中 ...", R.drawable.smallball, true);
                 Toast.makeText(this, "3秒之后关闭", Toast.LENGTH_SHORT).show();
                 new Thread() {
                     @Override

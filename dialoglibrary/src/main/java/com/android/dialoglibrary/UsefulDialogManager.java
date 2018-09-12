@@ -234,6 +234,24 @@ public class UsefulDialogManager {
             }
         }
     }
+    public  void showDateDialog(Activity activity, Calendar startDate, Calendar endDate,Calendar nowDate,boolean[] dateType,int size, TimePickerView.OnTimeSelectListener onTimeSelectListener){
+        if (!timePickerViewHashMap.containsKey(activity)){
+            TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
+                    .setContentSize(size) .setType(dateType).setRangDate(startDate, endDate).build();
+            pvTime.setDate(nowDate);
+            pvTime.show();
+            timePickerViewHashMap.put(activity,pvTime);
+        }else{
+            if (!timePickerViewHashMap.get(activity).isShowing()){
+                timePickerViewHashMap.remove(activity);
+                TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
+                        .setContentSize(size) .setType(dateType).setRangDate(startDate, endDate).build();
+                pvTime.setDate(nowDate);
+                pvTime.show();
+                timePickerViewHashMap.put(activity,pvTime);
+            }
+        }
+    }
     public  void showSelectDialog(Activity activity, List<String> list, String title,OptionsPickerView.OnOptionsSelectListener onOptionsSelectListener){
         if (!optionsPickerViewHashMap.containsKey(activity)){
             OptionsPickerView pvOptions = new  OptionsPickerView.Builder(activity,onOptionsSelectListener).setContentTextSize(20).setTitleText(title).build();

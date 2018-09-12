@@ -19,15 +19,15 @@
         android:id="@+id/tv_diloag_title"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_marginBottom="13dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-
-
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="90dp"
+        android:padding="10dp"
+        android:gravity="start"
+        android:textSize="14sp"
         android:textColor="@color/UsefulDialog_black"
-        android:theme="@style/MyEditText"
+        android:background="@drawable/edit_border"
         android:id="@+id/ed_diloag_message"/>
 
     <LinearLayout
