@@ -119,7 +119,7 @@ public class UsefulDialogManager {
     public  void showEditDialog(Activity activity,  EditType editType,String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
         if (!editDialogHashMap.containsKey(activity)){
             EditDialog editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
-                    .initBtnText(cancleText,sureText).initEditText("").setEditType(editType)
+                    .initBtnText(cancleText,sureText).initEditText("").initEditType(editType)
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
@@ -139,7 +139,7 @@ public class UsefulDialogManager {
     public  void showEditDialog(Activity activity, EditType editType,String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
         if (!editDialogHashMap.containsKey(activity)){
             EditDialog editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
-                    .initBtnText(cancleText,sureText).initEditText(editText).setEditType(editType)
+                    .initBtnText(cancleText,sureText).initEditText(editText).initEditType(editType)
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);

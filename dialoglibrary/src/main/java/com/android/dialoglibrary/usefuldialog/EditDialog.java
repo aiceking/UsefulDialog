@@ -31,17 +31,18 @@ public class EditDialog extends Dialog implements View.OnClickListener {
     private String sure;
     private String editText;
     private onBtnClickListener onBtnClickListener;
-
-    public EditDialog setEditType(EditType editType) {
+    public EditDialog initEditType(EditType editType) {
+        this.editType = editType;
+        return this;
+    }
+    public void setEditType(EditType editType) {
         this.editType = editType;
         if (editType == EditType.number) {
             edDiloagMessage.setInputType(InputType.TYPE_CLASS_NUMBER);
         }else{
             edDiloagMessage.setInputType(InputType.TYPE_CLASS_TEXT);
         }
-        return this;
     }
-
     private EditType editType;
     private Activity activity;
     public EditDialog(@NonNull Context context) {
@@ -102,10 +103,10 @@ public class EditDialog extends Dialog implements View.OnClickListener {
         btnDialogSure=(Button)findViewById(R.id.btn_dialog_sure);
         btnDialogSure.setOnClickListener(this);
         edDiloagMessage=(EditText)findViewById(R.id.ed_diloag_message);
-        if (UsefulDialogManager.getInstance().getEditType()!=null) {
-            if (UsefulDialogManager.getInstance().getEditType() == EditType.number) {
-                edDiloagMessage.setInputType(InputType.TYPE_CLASS_NUMBER);
-            }
+        if (editType == EditType.number) {
+            edDiloagMessage.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }else{
+            edDiloagMessage.setInputType(InputType.TYPE_CLASS_TEXT);
         }
         if (UsefulDialogManager.getInstance().getBtnCancleColor()!=0){
             btnDialogCancle.setTextColor(activity.getResources().getColor(UsefulDialogManager.getInstance().getBtnCancleColor()));
