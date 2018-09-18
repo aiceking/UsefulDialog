@@ -26,12 +26,23 @@ public class EditDialog extends Dialog implements View.OnClickListener {
     private Button btnDialogCancle;
     private Button btnDialogSure;
     private EditText edDiloagMessage;
-
     private String title;
     private String cancle;
     private String sure;
     private String editText;
     private onBtnClickListener onBtnClickListener;
+
+    public EditDialog setEditType(EditType editType) {
+        this.editType = editType;
+        if (editType == EditType.number) {
+            edDiloagMessage.setInputType(InputType.TYPE_CLASS_NUMBER);
+        }else{
+            edDiloagMessage.setInputType(InputType.TYPE_CLASS_TEXT);
+        }
+        return this;
+    }
+
+    private EditType editType;
     private Activity activity;
     public EditDialog(@NonNull Context context) {
         super(context);

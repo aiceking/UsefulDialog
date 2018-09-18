@@ -116,10 +116,10 @@ public class UsefulDialogManager {
             }
     }
     /**带输入框的dialog*/
-    public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
+    public  void showEditDialog(Activity activity,  EditType editType,String title, String cancleText, String sureText,EditDialog.onBtnClickListener listener){
         if (!editDialogHashMap.containsKey(activity)){
             EditDialog editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
-                    .initBtnText(cancleText,sureText).initEditText("")
+                    .initBtnText(cancleText,sureText).initEditText("").setEditType(editType)
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
@@ -127,6 +127,7 @@ public class UsefulDialogManager {
 
             if (!editDialogHashMap.get(activity).isShowing()){
                 editDialogHashMap.get(activity).setTitle(title);
+                editDialogHashMap.get(activity).setEditType(editType);
                 editDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 editDialogHashMap.get(activity).setOnBtnClickListener(listener);
                 editDialogHashMap.get(activity).setEditText("");
@@ -135,16 +136,17 @@ public class UsefulDialogManager {
         }
     }
     /**带输入框的dialog,有预输入内容*/
-    public  void showEditDialog(Activity activity, String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
+    public  void showEditDialog(Activity activity, EditType editType,String title, String cancleText, String sureText,String editText,EditDialog.onBtnClickListener listener){
         if (!editDialogHashMap.containsKey(activity)){
             EditDialog editDialog=new EditDialog(activity, R.style.useful_dialog).initTitle(title)
-                    .initBtnText(cancleText,sureText).initEditText(editText)
+                    .initBtnText(cancleText,sureText).initEditText(editText).setEditType(editType)
                     .setOnBtnClickListener(listener);
             editDialog.show();
             editDialogHashMap.put(activity,editDialog);
         }else{
             if (!editDialogHashMap.get(activity).isShowing()){
                 editDialogHashMap.get(activity).setTitle(title);
+                editDialogHashMap.get(activity).setEditType(editType);
                 editDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 editDialogHashMap.get(activity).setOnBtnClickListener(listener);
                 editDialogHashMap.get(activity).setEditText(editText);
@@ -239,6 +241,25 @@ public class UsefulDialogManager {
             TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
                     .setContentSize(size) .setType(dateType).setRangDate(startDate, endDate).build();
             pvTime.setDate(nowDate);
+            pvTime.show();
+            timePickerViewHashMap.put(activity,pvTime);
+        }else{
+            if (!timePickerViewHashMap.get(activity).isShowing()){
+                timePickerViewHashMap.remove(activity);
+                TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
+                        .setContentSize(size) .setType(dateType).setRangDate(startDate, endDate).build();
+                pvTime.setDate(nowDate);
+                pvTime.show();
+                timePickerViewHashMap.put(activity,pvTime);
+            }
+        }
+    }
+    public  void showDateDialog(Activity activity, Calendar startDate, Calendar endDate,Calendar nowDate,boolean[] dateType,int size, String cancle,String sure,TimePickerView.OnTimeSelectListener onTimeSelectListener){
+        if (!timePickerViewHashMap.containsKey(activity)){
+            TimePickerView pvTime = new TimePickerView.Builder(activity, onTimeSelectListener)
+                    .setContentSize(size) .setCancelText(cancle).setSubmitText(sure).setType(dateType).setRangDate(startDate, endDate).build();
+            pvTime.setDate(nowDate);
+
             pvTime.show();
             timePickerViewHashMap.put(activity,pvTime);
         }else{
