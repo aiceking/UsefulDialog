@@ -171,6 +171,24 @@ public class UsefulDialogManager {
             }
         }
     }
+    /**带Title和message的dialog*/
+    public  void showTitleAndMessageDialog(Activity activity, boolean cancle,String title,String message, String cancleText, String sureText,TitleAndMessageDialog.onBtnClickListener listener){
+        if (!titleAndMessageDialogHashMap.containsKey(activity)){
+            TitleAndMessageDialog titleAndMessageDialog=new TitleAndMessageDialog(activity, R.style.useful_dialog).initTitleAndMessage(title,message)
+                    .initBtnText(cancleText,sureText)
+                    .setOnBtnClickListener(listener);
+            titleAndMessageDialog.setCancelable(cancle);
+            titleAndMessageDialog.show();
+            titleAndMessageDialogHashMap.put(activity,titleAndMessageDialog);
+        }else{
+            if (!titleAndMessageDialogHashMap.get(activity).isShowing()){
+                titleAndMessageDialogHashMap.get(activity).setTitleAndMessage(title,message);
+                titleAndMessageDialogHashMap.get(activity).setBtnText(cancleText,sureText);
+                titleAndMessageDialogHashMap.get(activity).setOnBtnClickListener(listener);
+                titleAndMessageDialogHashMap.get(activity).show();
+            }
+        }
+    }
     /**只有Title的dialog*/
     public  void showOneTitleDialog(Activity activity, String title, String cancleText, String sureText,OneTitleDialog.onBtnClickListener listener){
         if (!oneTitleDialogHashMap.containsKey(activity)){
