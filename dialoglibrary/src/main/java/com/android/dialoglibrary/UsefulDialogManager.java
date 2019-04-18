@@ -15,6 +15,7 @@ import com.android.dialoglibrary.usefuldialog.LoadingDialog;
 import com.android.dialoglibrary.usefuldialog.OneTitleDialog;
 import com.android.dialoglibrary.usefuldialog.SmallLoadingDialog;
 import com.android.dialoglibrary.usefuldialog.TitleAndMessageDialog;
+import com.android.dialoglibrary.usefuldialog.TitleAndTwoMessageDialog;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
@@ -32,6 +33,7 @@ public class UsefulDialogManager {
     private HashMap<Activity,OneTitleDialog> oneTitleDialogHashMap;
     private HashMap<Activity,EditDialog> editDialogHashMap;
     private HashMap<Activity,TitleAndMessageDialog> titleAndMessageDialogHashMap;
+    private HashMap<Activity,TitleAndTwoMessageDialog> titleAndTwoMessageDialogHashMap;
     private HashMap<Activity,ListDialog> listDialogHashMap;
     private HashMap<Activity,SmallLoadingDialog> smallLoadingDialogHashMap;
     private HashMap<Activity,TimePickerView> timePickerViewHashMap;
@@ -67,6 +69,7 @@ public class UsefulDialogManager {
         oneTitleDialogHashMap=new HashMap<>();
         editDialogHashMap=new HashMap<>();
         titleAndMessageDialogHashMap=new HashMap<>();
+        titleAndTwoMessageDialogHashMap=new HashMap<>();
         listDialogHashMap=new HashMap<>();
         smallLoadingDialogHashMap=new HashMap<>();
         timePickerViewHashMap=new HashMap<>();
@@ -168,6 +171,24 @@ public class UsefulDialogManager {
                 titleAndMessageDialogHashMap.get(activity).setBtnText(cancleText,sureText);
                 titleAndMessageDialogHashMap.get(activity).setOnBtnClickListener(listener);
                 titleAndMessageDialogHashMap.get(activity).show();
+            }
+        }
+    }
+    /**带Title和message的dialog*/
+    public  void showTitleAndTwoMessageDialog(Activity activity, boolean cancle,String title,String message, String cancleText, String sureText,TitleAndTwoMessageDialog.onBtnClickListener listener){
+        if (!titleAndTwoMessageDialogHashMap.containsKey(activity)){
+            TitleAndTwoMessageDialog titleAndMessageDialog=new TitleAndTwoMessageDialog(activity, R.style.useful_dialog).initTitleAndMessage(title,message)
+                    .initBtnText(cancleText,sureText)
+                    .setOnBtnClickListener(listener);
+            titleAndMessageDialog.setCancelable(cancle);
+            titleAndMessageDialog.show();
+            titleAndTwoMessageDialogHashMap.put(activity,titleAndMessageDialog);
+        }else{
+            if (!titleAndTwoMessageDialogHashMap.get(activity).isShowing()){
+                titleAndTwoMessageDialogHashMap.get(activity).setTitleAndMessage(title,message);
+                titleAndTwoMessageDialogHashMap.get(activity).setBtnText(cancleText,sureText);
+                titleAndTwoMessageDialogHashMap.get(activity).setOnBtnClickListener(listener);
+                titleAndTwoMessageDialogHashMap.get(activity).show();
             }
         }
     }
@@ -327,6 +348,11 @@ public class UsefulDialogManager {
                 titleAndMessageDialogHashMap.get(activity).dismiss();
             }
         }
+        if (titleAndTwoMessageDialogHashMap.containsKey(activity)){
+            if (titleAndTwoMessageDialogHashMap.get(activity).isShowing()){
+                titleAndTwoMessageDialogHashMap.get(activity).dismiss();
+            }
+        }
         if (listDialogHashMap.containsKey(activity)){
             if (listDialogHashMap.get(activity).isShowing()){
                 listDialogHashMap.get(activity).dismiss();
@@ -378,6 +404,13 @@ public class UsefulDialogManager {
             }
             titleAndMessageDialogHashMap.remove(activity);
         }
+        if (titleAndTwoMessageDialogHashMap.containsKey(activity)){
+            if (titleAndTwoMessageDialogHashMap.get(activity).isShowing()){
+                titleAndTwoMessageDialogHashMap.get(activity).dismiss();
+            }
+            titleAndTwoMessageDialogHashMap.remove(activity);
+        }
+
         if (listDialogHashMap.containsKey(activity)){
             if (listDialogHashMap.get(activity).isShowing()){
                 listDialogHashMap.get(activity).dismiss();
